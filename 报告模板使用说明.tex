@@ -1,0 +1,849 @@
+\documentclass[abstractType=zh,sectionType=next,Reference={ref.bib,ref2.bib}]{MyReport}
+% 语言：默认为中文，如果英文需要指定[English]
+% 摘要类型，默认无摘要
+%    [abstractType=zh]: 只有中文摘要，通过\zhAbstractText{}设置中文摘要内容，通过\zhAbstractKey{}设置中文摘要关键词
+%    [abstractType=en]: 只有英文摘要，通过\enAbstractText{}设置英文摘要内容，通过\enAbstractKey{}设置英文摘要关键词
+%    [abstractType=zhen]: 中英文摘要
+% section 排版类型，默认为连续排版
+%    [sectionType=next]: section另起一页
+%    [sectionType=odd]: section另起一奇数页
+% 抄录环境，默认为minted
+%    [listType=minted]: minted 宏包
+%    [listType=listings]: listings 宏包
+% 参考文献，默认不排版
+%    [Reference={ref.bib}]: 参考文献文件为ref.bib
+
+% 基本信息，必须
+\titlename{模板使用说明}%报告名称
+\stuname{姓名}%姓名
+\stuID{123456789}%学号
+\stuClass{xxxx}%班级
+% 可选信息
+\zhAbstractText{%
+模板默认不排版摘要，如果需要排版摘要，可以通过可选参数\hndm{abstractType}设置摘要类型，各参数及其含义会在后文中说明。
+
+
+\begin{inparaenum}%[]
+    \item 通过命令\hndm{\zhAbstractText{}}设置中文摘要内容。
+    
+    \item 通过命令\hndm{\zhAbstractKey{}}设置中文摘要关键词。
+    
+    \item 通过命令\hndm{\enAbstractText{}}设置英文摘要内容。
+    
+    \item 通过命令\hndm{\enAbstractKey{}}设置英文摘要关键词。
+    
+\end{inparaenum}
+
+这些命令需要在导言区使用，命令\hndm{\zhAbstractText{}}等中可以正常放入一段或多段文字，与一般正文类似。
+
+如果不排版摘要，即使指定了这些命令的内容，模板也会忽略掉。
+}
+\zhAbstractKey{关键词}
+\enAbstractText{English abstract content}
+\enAbstractKey{abstract keywords}
+
+\begin{document}
+
+\section{报告说明}
+
+这是一份关于模板\hndm{MyReport.cls}的使用说明。本模板基于\LaTeX{}，请使用XeLaTeX进行编译。本模板在导言区通过命令\hndm{\documentclass{MyReport}}使用。
+
+模板提供了4个必选参数，通过命令\hndm{\titlename{}}设置报告名称，\hndm{\stuname{}}设置姓名，\hndm{\stuID{}}设置学号，\hndm{\stuClass{}}设置班级。
+
+模板提供了部分可选参数，具体说明及其使用方法如\cref{tab:可选参数说明}所示。
+
+\begin{inparaenum}%[]
+    \item 通过可选参数 \hndm{English}，支持全英文写作。
+
+    \item 通过可选参数 \hndm{abstractType} 设置摘要类型，默认无摘要。
+
+    如果设置了摘要，需要通过命令\hndm{\zhAbstractText{}}设置中文摘要内容，通过命令\hndm{\zhAbstractKey{}}设置中文摘要关键词，通过命令\hndm{\enAbstractText{}}设置英文摘要内容，通过命令\hndm{\enAbstractKey{}}设置英文摘要关键词。这些命令需要在导言区使用。
+
+    \item 通过可选参数 \hndm{sectionType} 设置section排版类型，默认为连续排版。
+
+    \item 通过可选参数\hndm{listType}设置抄录环境类型，默认为\hndm{minted}宏包提供环境，强烈建议保持默认。抄录环境的使用会在后文中详细说明。
+
+    \item 默认情况下不会排版参考文献，可以通过可选参数\hndm{Reference={ref.bib}}设置参考文献文件地址，此时会排版参考文献，具体使用方法与效果见第 \ref{sec:参考文献的使用} 章。
+\end{inparaenum}
+
+
+\begin{table}[H]
+    \centering
+    \caption{可选参数说明}
+    \label{tab:可选参数说明}
+    \begin{tabularx}{\linewidth}{cccY}
+        \toprule
+        参数           & 值        & 效果         & 使用示例                                               \\
+        \midrule
+        English      & -        & 全英文写作      & \hndm{\documentclass[English]{MyReport}}           \\
+        \midrule
+        abstractType & （默认）     & 无摘要        & \hndm{\documentclass{MyReport}}                    \\
+                     & zh       & 中文摘要       & \hndm{\documentclass[abstractType=zh]{MyReport}}   \\
+                     & en       & 英文摘要       & \hndm{\documentclass[abstractType=en]{MyReport}}   \\
+                     & zhen     & 中英文摘要      & \hndm{\documentclass[abstractType=zhen]{MyReport}} \\
+        \midrule
+        sectionType  & （默认）     & 连续排版       & \hndm{\documentclass{MyReport}}                    \\
+                     & next     & 另起一页       & \hndm{\documentclass[sectionType=next]{MyReport}}  \\
+                     & odd      & 另起一奇数页     & \hndm{\documentclass[sectionType=odd]{MyReport}}   \\
+        \midrule
+        listType     & （默认）     & minted宏包   & \hndm{\documentclass{MyReport}}                    \\
+                     & minted   & minted宏包   & \hndm{\documentclass[listType=minted]{MyReport}}   \\
+                     & listings & listings宏包 & \hndm{\documentclass[listType=listings]{MyReport}} \\
+        \midrule
+        Reference    & -        & 不排版参考文献    & \hndm{\documentclass{MyReport}}                    \\
+                     & ref.bib  & 排版参考文献     & \hndm{\documentclass[Reference=ref.bib]{MyReport}} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+综上所述，本模板的使用框架为
+\begin{lstlisting}[]{latex}
+\documentclass{MyReport}
+
+% 基本信息，必须
+\titlename{报告名称}    %报告名称
+\stuname{姓名}          %姓名
+\stuID{学号}            %学号
+\stuClass{班级}         %班级
+% 可选信息
+\zhAbstractText{中文摘要内容}
+\zhAbstractKey{关键词}
+\enAbstractText{English abstract content}
+\enAbstractKey{abstract keywords}
+
+\begin{document}
+
+\section{xxx}
+
+\end{document}
+\end{lstlisting}
+
+\subsection{文档层级}
+本模板标题设置了4个层级，命令与一般\LaTeX{}使用相同，如\cref{tab:文档层级设置}所示。
+\begin{table}[H]
+    \centering
+    \caption{文档层级设置}
+    \label{tab:文档层级设置}
+    \begin{tabularx}{\linewidth}{YY}
+        \toprule
+        层级 & 命令                      \\
+        \midrule
+        1  & \hndm{\section{}}       \\
+        2  & \hndm{\subsection{}}    \\
+        3  & \hndm{\subsubsection{}} \\
+        4  & \hndm{\paragraph{}}     \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{三级标题示例}
+
+\paragraph{四级标题示例}
+
+\subsection{加粗与斜体}
+在中文中，一般会使用加粗突出重点，请使用命令\hndm{\textbf{}}；在英文中，一般会使用斜体突出重点，请使用命令\hndm{\emph{}}。
+
+此外，可以使用命令\hndm{\textit{}}实现斜体，使用\hndm{\underline{}}实现下划线。
+
+以下是一段示例代码：
+
+\begin{texcode}[]{}
+    中文强调\textbf{示例}，英文强调\emph{示例}。
+    中文斜体\textit{示例}，下划线\underline{示例}
+\end{texcode}
+
+\subsection{脚注}
+
+脚注可以通过\hndm{\footnote{}}自动编号生成，模板设置了编号每页从1计数。效果如本页\footnote{脚注效果}所示。
+
+\subsection{英文写作}
+通过\hndm{\documentclass[English]{MyReport}}指定写作类型为英文写作，此时图标签、表标签等均改为其对应的英文形式。其对应形式如\cref{tab:中英文标签对照}所示。
+\begin{table}[H]
+    \centering
+    \caption{中英文标签对照}
+    \label{tab:中英文标签对照}
+    \begin{tabularx}{\linewidth}{YYYY}
+        \toprule
+        \multirow{2}{*}{类型} & \multirow{2}{*}{中文} & \multicolumn{2}{c}{英文}          \\
+        \cmidrule(l){3-4}
+                            &                     & 单数                     & 复数     \\
+        \midrule
+        图片                  & 图                   & Fig.                   & Figs.  \\
+        表格                  & 表                   & Table                  & Tables \\
+        公式                  & 式                   & Eq.                    & Eqs.   \\
+        算法                  & 算法                  & Alg.                   & Algs.  \\
+        程序                  & 程序                  & Lst.                   & Lst.   \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\section{公式使用说明}
+
+\subsection{公式字体}
+
+模板中文字体为宋体，英文字体与公式字体均为Times New Roman字体，字体呈现效果如\cref{eq:公式字体}所示。
+\begin{equation}
+    \begin{array}{c}
+        1234567890                                                                                                                                                                                          \\
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ                                                                                                                                                                          \\
+        abcdefghijklmnopqrstuvwxyz                                                                                                                                                                          \\
+        \ve{ABCDEFGHIJKLMNOPQRSTUVWXYZ}                                                                                                                                                                     \\
+        \ve{abcdefghijklmnopqrstuvwxyz}                                                                                                                                                                     \\
+        \alpha \beta \gamma \delta \epsilon \varepsilon \zeta \eta \theta \vartheta \iota \kappa \lambda \mu \nu \xi o \pi \varpi \rho \varrho \sigma \varsigma \tau \upsilon \phi \varphi \chi \psi \omega \\
+        A B \Gamma \varGamma \Delta \varDelta E Z H \Theta \varTheta I K \Lambda \varLambda M N \Xi \varXi O \Pi \varPi P \Sigma \varSigma T \Upsilon \varUpsilon \Phi \varPhi X \Psi \varPsi \Omega \varOmega
+    \end{array}
+    \label{eq:公式字体}
+\end{equation}
+部分大型符号呈现效果如\cref{eq:大型符号}所示。
+\begin{equation}
+    \sum \prod \coprod \int \iint \iiint \oint \oiint \varoiint \biguplus \bigcap \bigcup \bigoplus \bigotimes \bigodot \bigvee \bigwedge \bigsqcup
+    \label{eq:大型符号}
+\end{equation}
+
+\subsection{数字与单位}
+模板导入了\hndm{siunitx}宏包，通过该宏包可以方便地输入一些数字，具体使用方法可以查看该宏包手册，部分用法如\cref{tab:siunitx宏包输入部分类型的数字}所示。
+
+\begin{table}[H]
+    \centering
+    \caption{siunitx宏包输入部分类型的数字}
+    \label{tab:siunitx宏包输入部分类型的数字}
+    \begin{tabularx}{\linewidth}{YY}
+        \toprule
+        命令                   & 效果            \\
+        \midrule
+        \hndm{\num{3.45d-4}} & \num{3.45d-4} \\
+        \hndm{\num{-e10}}    & \num{-e10}    \\
+        \hndm{\ang{1;2;3}}   & \ang{1;2;3}   \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+通过\hndm{siunitx}宏包可以方便地输入数学物理单位，使用命令\hndm{\SI{数字}{单位}}，该命令既可以在文本中使用，也可以在数学环境中使用，如\cref{tab:siunitx宏包输入部分数学物理单位}所示。
+\begin{table}[H]
+    \centering
+    \caption{siunitx宏包输入部分数学物理单位}
+    \label{tab:siunitx宏包输入部分数学物理单位}
+    \begin{tabularx}{\linewidth}{YY}
+        \toprule
+        命令                       & 效果                \\
+        \midrule
+        \hndm{\SI{10}{\meter}}   & \SI{10}{\meter}   \\
+        \hndm{$\SI{10}{\meter}$} & $\SI{10}{\meter}$ \\
+        \hndm{\SI{10}{m}}        & \SI{10}{m}        \\
+        \hndm{$\SI{10}{m}$}      & $\SI{10}{m}$      \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{公式环境}
+行内公式请使用美元符号\hndm{$···$}包裹，如下所示。
+
+\begin{texcode}[]{}
+    这是一个行内公式$y=kx+n$。
+\end{texcode}
+
+行间公式请使用\hndm{\equation}环境，模板会按章节进行编号。在\hndm{equation}环境中使用\hndm{\label{}}命令设置标签，从而可以交叉引用。模板建议为公式标签加入前缀eq，如下所示。
+
+\begin{texcode}[]{}
+    \begin{equation}
+        \e^x =\sum\limits_{n=0}^{\infty} \frac{x^n}{n!}=1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\cdots \qquad x\in(-\infty ,+\infty)
+        \label{eq:公式示例，建议使用eq前缀}
+    \end{equation}
+\end{texcode}
+
+对于多行公式，请使用\hndm{equation}环境嵌套\hndm{split}环境，这样整个公式使用一个编号。
+
+\begin{equation}
+    \begin{split}
+        \int_{(L)}f(x,y) \diff s
+         & =\int_\alpha^\beta f[\ x(t),y(t)\ ]\sqrt{[\ x'^2(t)+y'^2(t)\ ]} \diff t                   \\
+         & =\int_a^b f(x,y(x))\sqrt{1+y'^2} \diff x                                                  \\
+         & =\int_\alpha^\beta f(\rho \cos \theta,\rho \sin \theta)\sqrt{\rho^2+\rho'^2} \diff \theta
+    \end{split}
+    \label{eq:多行公式}
+\end{equation}
+\cref{eq:多行公式}的代码如下所示：
+\begin{lstlisting}[]{latex}
+    \begin{equation}
+        \begin{split}
+            \int_{(L)}f(x,y) \diff s
+            &=\int_\alpha^\beta f[\ x(t),y(t)\ ]\sqrt{[\ x'^2(t)+y'^2(t)\ ]} \diff t \\
+            &=\int_a^b f(x,y(x))\sqrt{1+y'^2} \diff x                                \\
+            &=\int_\alpha^\beta f(\rho\cos\theta,\rho\sin\theta)\sqrt{\rho^2+\rho'^2}\diff\theta
+        \end{split}
+        \label{eq:多行公式}
+    \end{equation}
+\end{lstlisting}
+
+\subsubsection{公式间距微调}
+\begin{texcode}[]{}
+    \begin{equation}
+        f(x)=\sum_{n=-\infty}^{\infty} c_n \e^{\ii nx}
+        \label{eq:f间距过小}
+    \end{equation}
+\end{texcode}
+
+上述情况中，$f$与后面字符的间距过小，影响美观。为了解决这个问题，可以在字符$f$之前使用双引号\hndm{$"f$}改善间距。
+
+\begin{texcode}[]{}
+    \begin{equation}
+        "f(x)=\sum_{n=-\infty}^{\infty} c_n \e^{\ii nx}
+        \label{eq:f间距改善}
+    \end{equation}
+\end{texcode}
+
+\subsubsection{公式的交叉引用}\label{sec:公式的交叉引用}
+交叉引用时，请使用\hndm{\cref{}}命令，如\cref{eq:公式示例，建议使用eq前缀}所示。
+
+\begin{texcode}[]{}
+    如\cref{eq:公式示例，建议使用eq前缀}所示。
+\end{texcode}
+
+如果需要引用多个公式，在\hndm{\cref{}}命令中使用逗号分隔，该命令会自动根据引用数量调整呈现方式。
+\begin{texcode}[]{}
+    如\cref{eq:公式字体}所示，
+    如\cref{eq:公式字体,eq:大型符号}所示，
+    如\cref{eq:公式字体,eq:大型符号,eq:公式示例，建议使用eq前缀}所示
+    如\cref{eq:公式字体,eq:大型符号,eq:多行公式}所示
+    如\cref{eq:公式字体,eq:大型符号,eq:公式示例，建议使用eq前缀,eq:多行公式}所示
+\end{texcode}
+
+\subsection{自定义符号}
+为了方便使用，模板定义了一些常用的数学符号，这些符号需要在公式环境中使用，如\cref{tab:自定义数学符号}所示。
+\begin{table}[H]
+    \centering
+    \caption{自定义数学符号}
+    \label{tab:自定义数学符号}
+    \begin{tabularx}{\linewidth}{YYYY}
+        \toprule
+        种类       & 命令              & 效果       & 举例               \\
+        \midrule
+        微分号      & \hndm{$\diff$}  & $\diff$  & $\sin x \diff x$ \\
+        微分号      & \hndm{$\Diff$}  & $\Diff$  & $\sin x \Diff x$ \\
+        自然指数符号   & \hndm{$\e$}     & $\e$     & $\cos \e^x$      \\
+        虚数符号     & \hndm{$\ii$}    & $\ii$    & $z=x+\ii y$      \\
+        实数域      & \hndm{$\R$}     & $\R$     & $V\in \R$        \\
+        向量加粗斜体效果 & \hndm{$\ve{A}$} & $\ve{A}$ & $\ve{U}=U_x+U_y$ \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{子公式}
+\hndm{subequation}环境可以在公式中定义子公式。
+\begin{texcode}[]{}
+    \begin{subequations}
+        \begin{equation}
+            \phi(\eta)=\sqrt{\frac{2U}{\nu}}"f(y)
+            \label{subeq:子公式示例1}
+        \end{equation}
+        \begin{equation}
+            \eta=\sqrt{\frac{2U}{\nu}}y
+            \label{subeq:子公式示例2}
+        \end{equation}
+        \label{eq:子公式示例}
+    \end{subequations}
+    通过\cref{eq:子公式示例}整体引用，通过\cref{subeq:子公式示例1}引用子公式。
+\end{texcode}
+
+\section{枚举（列表）环境}
+模板建议使用\hndm{inparaenum}环境，该环境默认使用罗马数字编号，这种环境下的每个条目都会以与正文相同的格式进行段首缩进的排版，而不是悬挂缩进，效果如下。
+
+\begin{inparaenum}
+    \item 列表1内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容；
+
+    \item 列表2内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容。
+
+\end{inparaenum}
+
+\hndm{inparaenum}环境的基本使用方法与\hndm{enumerate}一致，如下所示。
+
+\begin{lstlisting}{latex}
+\begin{inparaenum}%[]
+    \item 列表1内容内容内容内容内容内容内容；
+
+    \item 列表2内容内容内容内容内容内容内容。
+
+\end{inparaenum}
+\end{lstlisting}
+
+\hndm{inparaenum}环境的使用还有以下几个注意点：
+
+\begin{inparaenum}[(1)]
+\item 可以通过可选命令改变编号样式，比如本文这里通过\hndm{\begin{inparaenum}[(1)]}改变了编号为小括号的样式。
+
+\item 每个条目之间必须有空行，与一般的正文段落相似，\hndm{inparaenum}环境的每个条目都是一个段落。
+
+\item \hndm{inparaenum}环境之间可以插入公式，比如这里
+
+\begin{equation}
+    \int_0^{+\infty} \e^{-x^2}\diff x=\frac{\sqrt{\pi}}{2}
+    \label{eq:inparaenum环境嵌套公式}
+\end{equation}
+
+\item \hndm{inparaenum}环境之中可以再嵌套\hndm{inparaenum}环境。
+
+\end{inparaenum}
+
+\section{浮动体（图表）的使用}
+\subsection{图片}
+\subsubsection{单张图片的使用}
+单张图片使用\hndm{figure}环境。并通过可选参数指定浮动体的位置，使用代码与效果如下所示。
+
+\begin{lstlisting}{latex}
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.3\linewidth]{material/xjtu_blue.pdf}
+    \caption{蓝色校徽单张}
+    \label{fig:蓝色校徽单张}
+\end{figure}
+\end{lstlisting}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.3\linewidth]{material/xjtu_blue.pdf}
+    \caption{蓝色校徽单张}
+    \label{fig:蓝色校徽单张}
+\end{figure}
+
+\subsubsection{多图并排}
+一行排版多张图片时，请使用\hndm{float}环境嵌套\hndm{minipage}环境，需要为每个\hndm{minipage}环境指定宽度，注意一行的宽度之和不要超过页面宽度。
+
+\begin{lstlisting}{latex}
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.495\linewidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{material/xjtu_blue.pdf}
+        \caption{多图并排蓝色校徽}
+        \label{fig:多图并排蓝色校徽}
+    \end{minipage}
+    \begin{minipage}{0.495\linewidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{material/xjtu_gray.pdf}
+        \caption{多图并排灰色校徽}
+        \label{fig:多图并排灰色校徽}
+    \end{minipage}
+\end{figure}
+\end{lstlisting}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.495\linewidth}
+        \centering
+        \includegraphics[width=0.5\linewidth]{material/xjtu_blue.pdf}
+        \caption{多图并排蓝色校徽}
+        \label{fig:多图并排蓝色校徽}
+    \end{minipage}
+    \begin{minipage}{0.495\linewidth}
+        \centering
+        \includegraphics[width=0.5\linewidth]{material/xjtu_gray.pdf}
+        \caption{多图并排灰色校徽}
+        \label{fig:多图并排灰色校徽}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{多字图}
+多字图排版时，请使用\hndm{float}环境嵌套\hndm{subfigure}环境，需要为每个\hndm{subfigure}环境指定宽度，注意一行的宽度之和不要超过页面宽度。
+
+\begin{lstlisting}{latex}
+\begin{figure}[!htb]
+    \centering
+    \begin{subfigure}[c]{0.49\linewidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{material/xjtu_blue.pdf}
+        \subcaption{子图蓝色校徽}
+        \label{subfig:子图蓝色校徽}
+    \end{subfigure}
+    \begin{subfigure}[c]{0.49\linewidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{material/xjtu_gray.pdf}
+        \subcaption{子图灰色校徽}
+        \label{subfig:子图灰色校徽}
+    \end{subfigure}
+    \caption{子图排版}
+    \label{fig:子图排版}
+\end{figure}
+\end{lstlisting}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{subfigure}[c]{0.49\linewidth}
+        \centering
+        \includegraphics[width=0.5\linewidth]{material/xjtu_blue.pdf}
+        \subcaption{子图蓝色校徽}
+        \label{subfig:子图蓝色校徽}
+    \end{subfigure}
+    \begin{subfigure}[c]{0.49\linewidth}
+        \centering
+        \includegraphics[width=0.5\linewidth]{material/xjtu_gray.pdf}
+        \subcaption{子图灰色校徽}
+        \label{subfig:子图灰色校徽}
+    \end{subfigure}
+    \caption{子图排版}
+    \label{fig:子图排版}
+\end{figure}
+
+\begin{texcode}[]{}
+    对于多字图排版，既可以总体交叉引用，如\cref{fig:子图排版}所示，
+    也可以局部交叉引用，如\cref{subfig:子图蓝色校徽}所示。
+\end{texcode}
+
+\subsubsection{Tikz绘图}
+模板引入了\hndm{tikz}宏包，并通过\hndm{\usetikzlibrary}导入了常用的绘图命令，具体使用方法可以参考\hndm{tikz}宏包的官方文档。如果有其他绘图要求，可以自行在导言区导入。
+
+模板还预设了流程图的样式，绘图时可以将\hndm{tikzpicture}环境放在\hndm{figure}环境中，并使用\hndm{tikzstyle}命令设置流程图样式。
+
+\begin{figure}[!htp]
+    \centering
+    \begin{tikzpicture}[node distance=0.5cm]
+        %定义流程图具体形状
+        \tikzstyle{every node}=[font=\small]
+        \node[startstop](start){开始};
+        \node[process, below of = start, yshift = -0.7cm](p1){流程1};
+        \node[process, below of = p1, yshift = -0.7cm](p2){流程2，方框随内容动态变化长度};
+        \node[process, below of = p2, yshift = -0.7cm](p3){流程3};
+        \node[decision, below of = p3, yshift = -1cm](d1){判断节点};
+        \node[process, right of = d1, xshift = 3.3cm](p5){分支2};
+        \node[process, below of = d1, yshift = -1cm](p6){分支1};
+        \node[decision, below of = p6, yshift = -0.7cm](d2){终止条件};
+        \node[startstop, below of = d2, yshift = -0.7cm](stop){结束};
+        %连接具体形状
+        \draw [arrow] (start) -- (p1);
+        \draw [arrow] (p1) -- (p2);
+        \draw [arrow] (p2) -- (p3);
+        \draw [arrow] (p3) -- (d1);
+        \draw (d1) -- node [above] {N} (p5);
+        \draw [arrow] (p5) |- (p6);
+        \draw [arrow] (d1) -- node [right] {Y} (p6);
+        \draw [arrow] (p6) -- (d2);
+        \draw (d2.west) -- ++(-2cm,0) |- (p2.west);
+        \draw [arrow] (d2) -- (stop);
+    \end{tikzpicture}
+    \caption{流程图示意}
+    \label{fig:流程图示意}
+\end{figure}
+
+以上流程图的绘制代码如下：
+\begin{lstlisting}{latex}
+\begin{figure}[!htp]
+    \centering
+    \begin{tikzpicture}[node distance=0.5cm]
+        %定义流程图具体形状
+        \tikzstyle{every node}=[font=\small]
+        \node[startstop](start){开始};
+        \node[process, below of = start, yshift = -0.7cm](p1){流程1};
+        \node[process, below of = p1, yshift = -0.7cm](p2){流程2，方框随内容动态变化长度};
+        \node[process, below of = p2, yshift = -0.7cm](p3){流程3};
+        \node[decision, below of = p3, yshift = -1cm](d1){判断节点};
+        \node[process, right of = d1, xshift = 3.3cm](p5){分支2};
+        \node[process, below of = d1, yshift = -1cm](p6){分支1};
+        \node[decision, below of = p6, yshift = -0.7cm](d2){终止条件};
+        \node[startstop, below of = d2, yshift = -0.7cm](stop){结束};
+        %连接具体形状
+        \draw [arrow] (start) -- (p1);
+        \draw [arrow] (p1) -- (p2);
+        \draw [arrow] (p2) -- (p3);
+        \draw [arrow] (p3) -- (d1);
+        \draw (d1) -- node [above] {N} (p5);
+        \draw [arrow] (p5) |- (p6);
+        \draw [arrow] (d1) -- node [right] {Y} (p6);
+        \draw [arrow] (p6) -- (d2);
+        \draw (d2.west) -- ++(-2cm,0) |- (p2.west);
+        \draw [arrow] (d2) -- (stop);
+    \end{tikzpicture}
+    \caption{流程图示意}
+    \label{fig:流程图示意}
+\end{figure}
+\end{lstlisting}
+
+\subsection{表格}
+一般学术论文要求表格使用通栏的三线表，通过\hndm{tabularx}环境使用，通过\hndm{X}、\hndm{Y}、\hndm{Z}指定列对齐方式为左对齐、居中对齐、右对齐。注意点如下：
+
+\begin{inparaenum}%[]
+    \item \hndm{X}、\hndm{Y}、\hndm{Z}可以和\hndm{l}、\hndm{c}、\hndm{r}混合使用。
+
+    \item 应确保，至少使用一个\hndm{X}、\hndm{Y}、\hndm{Z}中的一种，否则可能无法使表格通栏。
+
+    \item 某个单元格内容过长时，表格会自动换行，默认一行内容顶端对齐。
+
+    \item 如果想要让单元格内容换行后，这一行居中对齐，可以使用\hndm{\makecell{xx \\ xx}}命令，这时需要自己手动在合适的位置换行。
+\end{inparaenum}
+
+\begin{texcode}[]{}
+    \begin{table}[H]
+        \centering
+        \caption{普通三线表示例}
+        \label{tab:普通三线表示例}
+        \begin{tabularx}{\linewidth}{YY}
+            \toprule
+            标题 & 标题 \\
+            \midrule
+            内容 & 内容 \\
+            内容 & 内容 \\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+\end{texcode}
+
+\subsubsection{复杂表格}
+
+\begin{inparaenum}%[]
+    \item 使用\hndm{\multirow}命令横向合并单元格，使用\hndm{\multicolumn}命令纵向合并单元格;
+
+    \item 使用\hndm{\midrule}添加较细的横向分割线，模板定义了\hndm{\thinrule}命令快速添加较细的横向分割线；
+
+    \item 使用\hndm{\cmidrule(lr){2-3}}在部分列添加横向分割线，具体参照\hndm{booktabs}宏包；
+
+    \item 使用\hndm{\makecell{xx \\ xx}}命令可以让单元格内容换行后，这一行居中对齐。
+
+\end{inparaenum}
+
+\begin{table}[H]
+    \centering
+    \caption{复杂表格示例}
+    \label{tab:复杂表格示例}
+    \begin{tabularx}{\linewidth}{*{7}Y}
+        \toprule
+        \multirow{2}*{Model}  & \multicolumn{3}{c}{trigger identification} &
+        \multicolumn{3}{c}{Event Extraction}                                                                         \\
+        \cmidrule(lr){2-4}\cmidrule(l){5-7}
+                              & P(\%)                                      & R(\%) & F1(\%) & P(\%) & R(\%) & F1(\%) \\
+        \midrule
+        Baseline1             & 76.84                                      & 76.84 & 76.84  & 76.84 & 76.84 & 76.84  \\
+        \midrule[0.5pt]
+        Baseline2             & 76.84                                      & 76.84 & 76.84  & 76.84 & 76.84 & 76.84  \\
+        Baseline3             & 76.84                                      & 76.84 & 76.84  & 76.84 & 76.84 & 76.84  \\
+        \thinrule
+        自动换行顶部对齐              & 76.84                                      & 76.84 & 76.84  & 76.84 & 76.84 & 76.84  \\
+        \thinrule
+        \makecell{手动换行\\居中对齐} & 76.84                                      & 76.84 & 76.84  & 76.84 & 76.84 & 76.84  \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\begin{lstlisting}{latex}
+    \begin{table}[H]
+        \centering
+        \caption{复杂表格示例}
+        \label{tab:复杂表格示例}
+        \begin{tabularx}{\linewidth}{*{7}Y}
+            \toprule
+            \multirow{2}*{Model}  & \multicolumn{3}{c}{trigger identification} &
+            \multicolumn{3}{c}{Event Extraction}    \\
+            \cmidrule(lr){2-4}\cmidrule(l){5-7}
+                            & P(\%)  & R(\%)  & F1(\%) & P(\%)  & R(\%)  & F1(\%)      \\
+            \midrule
+            Baseline1       & 76.84  & 76.84  & 76.84  & 76.84  & 76.84  & 76.84       \\
+            \midrule[0.5pt]
+            Baseline2       & 76.84  & 76.84  & 76.84  & 76.84  & 76.84  & 76.84       \\
+            Baseline3       & 76.84  & 76.84  & 76.84  & 76.84  & 76.84  & 76.84       \\
+            \thinrule
+            这里自动换行，顶部对齐  & 76.84    & 76.84 & 76.84 & 76.84  & 76.84 & 76.84 \\
+            \thinrule
+            \makecell{手动换行\\居中对齐} & 76.84  & 76.84 & 76.84 & 76.84 & 76.84 & 76.84 \\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+\end{lstlisting}
+
+\subsubsection{长表格自动跨页}
+跨页长表格请使用\hndm{xltabular}环境，其使用结构如下所示。一般情况下，只需要修改代码中高亮行的内容（表头部分和表格内容部分），其余部分保持不动。
+\begin{lstlisting}[highlightlines={6,12,25}]{latex}
+    \begin{xltabular}{\textwidth}{YY}
+        \caption{跨页长表格}
+        \label{表：跨页长表格}\\
+        \toprule 
+        % 这里写第一页表头的内容
+        参数类型 &具体参数 \\
+        \midrule
+        \endfirsthead
+        % 这里写之后每一页的表头的内容，可选
+        \multicolumn{2}{c}{\tablename\thetable{}（续）} \\
+        \toprule 
+        参数类型 &具体参数 \\
+        \midrule
+        \endhead
+        % 这里写第一页表尾的内容，可选
+        \bottomrule
+        \multicolumn{2}{r}{\kaishu 表格待续} \\
+        \endfoot
+        % 这里写最后一页表尾的内容，可选
+        \bottomrule
+        \endlastfoot
+        %%表格内容
+        xx & xx\\
+    \end{xltabular}
+\end{lstlisting}
+
+\begin{xltabular}{\textwidth}{YY}
+    \caption{跨页长表格}
+    \label{表：跨页长表格}\\
+    \toprule
+    % 这里写第一页表头的内容
+    参数类型 &具体参数 \\
+    \midrule
+    \endfirsthead
+    % 这里写之后每一页的表头的内容
+    \multicolumn{2}{c}{\tablename\thetable{}（续）} \\
+    \toprule
+    参数类型 &具体参数 \\
+    \midrule
+    \endhead
+
+    % 这里写第一页表尾的内容
+    \bottomrule
+    \multicolumn{2}{r}{\kaishu 表格待续} \\
+    \endfoot
+
+    % 这里写最后一页表尾的内容
+    \bottomrule
+    \endlastfoot
+    %%表格内容
+    功率 &\SI{22}{\watt}\\
+    效率& $90\%$\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+    内容 &内容\\
+\end{xltabular}
+
+\subsection{图表的交叉引用}
+图表的交叉引用请使用\hndm{\cref{}}命令，具体使用方法与前文中第 \ref{sec:公式的交叉引用} 节中公式的交叉引用使用方法相同。
+
+\begin{texcode}[]{}
+    如\cref{fig:蓝色校徽单张}所示。
+    如\cref{fig:蓝色校徽单张,fig:多图并排蓝色校徽}所示。
+    如\cref{fig:蓝色校徽单张,fig:多图并排蓝色校徽,fig:多图并排灰色校徽}所示。
+    如\cref{fig:蓝色校徽单张,fig:多图并排蓝色校徽,fig:子图排版}所示。
+\end{texcode}
+
+\section{算法与抄录环境}
+\subsection{算法环境}
+本模板使用\hndm{algorithm2e}宏包排版算法，具体使用方法见\hndm{algorithm2e}宏包手册。
+
+\begin{algorithm}
+    \caption{共轭梯度法}\label{alg:共轭梯度法}
+    \KwIn{对称正定矩阵$\ve{A}$，常数向量$\ve{b}$，精度，最大迭代数}
+    \KwOut{解向量 $\ve{x}$}
+    $\ve{x}^0\leftarrow \textbf{0}$  \tcp*[r]{初始值}
+    $\ve{r}\leftarrow \ve{b}-\ve{A}\ve{x}^0$ \;
+    $\ve{d}\leftarrow \ve{r}$ \;
+    误差 = $\|\ve{r} \| $\;
+    \While{迭代次数 $<$ 最大迭代数}{
+        $\alpha\leftarrow \frac{\ve{r}^{\rm T}\ve{d}}{\ve{d}^{\rm T}\ve{Ad}}$ \;
+        $\ve{x}\leftarrow \ve{x}+\alpha\ve{d}$ \;
+        $\ve{r}\leftarrow \ve{b}-\ve{Ax}$ \;
+        误差 = $\|\ve{r} \| $\;
+        \If{误差 $<$ 精度}{
+            跳出循环 \;
+        }
+        $\beta\leftarrow -\frac{\ve{r}^{\rm T}\ve{Ad}}{\ve{d}^{\rm T}\ve{Ad}}$ \;
+        $\ve{d}\leftarrow \ve{r}+\beta\ve{d}$ \;
+    }
+    返回解向量 $\ve{x}$ \;
+\end{algorithm}
+
+\subsection{抄录环境}
+
+\begin{inparaenum}%[]
+    \item 本模板使用\hndm{minted}宏包排版抄录。
+
+    \item \hndm{minted}宏包需要Python环境的Pygments库，因为minted依赖于该模块提供超过300种语言的语法高亮，请确保电脑中安装了Python环境。
+
+    \item \hndm{minted}宏包在编译时需要添加选项\hndm{-shell-escape}。（自行测试下来，不需要该选项似乎也能正常编译，如果一次编译不通过，连续编译两次即可。）
+
+    \item \hndm{minted}宏包提供了\hndm{listing}浮动体环境，从而可以给抄录环境增加标题与标签，但这种环境不支持跨页，因此模板\textbf{不}建议使用。
+
+    \item 模板基于\hndm{minted}宏包宏包定义了\hndm{lstlisting}环境，\textbf{建议}使用该环境排版，其使用方法如下所示。
+
+    \begin{minted}{latex}
+    \begin{lstlisting}[caption={标题},label={code:标签},highlightlines={}]{<语言>}
+    import numpy as np
+
+    def vec_add(x, y):
+        return x + y
+
+    x = np.array([1, 2, 3])
+    y = np.array([4, 5, 6])
+    print(f"结果：{vec_add(x, y)}")
+    \end{lstlisting}
+    \end{minted}
+
+    \item 如果电脑没有Python环境，模板同时定义了可选参数\hndm{listType}，如\cref{tab:可选参数说明}所示，通过\hndm{[listType=listings]}，修改抄录环境的宏包为\hndm{listings}，可以用\hndm{listings}宏包排版抄录。模板基于\hndm{listings}宏包定义好了抄录环境样式，通过环境\hndm{lstlisting}使用。模板设置了两种抄录宏包共用一套环境与使用语法，即\hndm{listings}宏包下的\hndm{lstlisting}环境与上文所示的使用方法完全一致。因此可以通过\hndm{[listType=listings]}一键切换宏包。
+
+    \item \hndm{listings}的高亮效果不如\hndm{minted}宏包好，因此模板默认使用\hndm{minted}宏包排版抄录。
+
+    \item 使用\hndm{minted}宏包时，可以通过\hndm{[highlightlines={1,3,5}]}来高亮指定行，多个行号之间使用半角逗号\hndm{,}分隔；模板预设了默认高亮颜色，如果需要指定行高亮颜色，可以通过可选参数\hndm{[highlightcolor=<颜色>]}实现。如果切换到\hndm{listings}宏包，由于\hndm{listings}宏包不支持高亮行操作，因此模板会忽略掉这两个参数。
+
+\end{inparaenum}
+
+
+
+\begin{lstlisting}[caption={抄录环境示意},label={code:抄录环境示意},highlightlines={3}]{python}
+import numpy as np
+
+def vec_add(x, y): # 向量加法
+    return x + y
+
+x = np.array([1, 2, 3])
+y = np.array([4, 5, 6])
+print(f"结果：{vec_add(x, y)}")
+\end{lstlisting}
+
+\section{参考文献的使用}\label{sec:参考文献的使用}
+通过\hndm{\documentclass[Reference={ref.bib}]{MyReport}}排版参考文献。
+
+\begin{inparaenum}%[]
+    \item 模板使用宏包\hndm{biblatex}与命令\hndm{biber}编译参考文献，标准为GB/T 7714-2015，采用顺序编码制。
+
+    \item 需注意，不需要参考文献时，应使用\hndm{XeLaTeX}编译\hndm{.tex}文件；需要使用参考文献时，应使用\hndm{XeLaTeX -> biber -> XeLaTeX -> XeLaTeX}四步编译\hndm{.tex}文件。首次编译时间较长，请耐心等待。如果参考文献文件\hndm{ref.bib}与引用没有更改，可以切换回单次\hndm{XeLaTeX}编译。
+
+    \item 使用\hndm{Reference={ref.bib}}时，需要将参考文献文件\hndm{ref.bib}放在\hndm{.tex}同一路径下，或者应该指定\hndm{ref.bib}路径，如\hndm{Reference={path/ref.bib}}
+
+    \item 使用\hndm{\cite{}}的引用结果作为上标出现；\hndm{\parencite{}}的引用结果作为正文内容出现；\hndm{\footfullcite{}}的引用结果作为脚注出现\footfullcite{Chugh2018}。
+
+    \item 如果需要引入多个\hndm{.bib}文件，可以使用\hndm{[Reference={ref.bib,ref2.bib}]}实现。多个文件之间用半角逗号\hndm{,}分隔，这里引用一条\hndm{ref2.bib}中的文献\cite{Elimelech2011}。
+
+\end{inparaenum}
+
+\begin{texcode}[]{}
+    上标引用\cite{Coello2005}，
+    上标引用两个文献\cite{Coello2005,Cheng2016} ,
+    上标引用多个文献\cite{Coello2005,Cheng2016,Chugh2018,Li2009} ,
+    中文文献\cite{HeJiHong2022},
+    正文引用\parencite{Zitzler2000} ,
+\end{texcode}
+
+\end{document}
