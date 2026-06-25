@@ -17,6 +17,7 @@
 \RequirePackage[hidelinks,bookmarksnumbered=true]{hyperref}     %加超链接，需要连续编译两次
 \RequirePackage{glossaries}                                     %生成主要符号表
 \RequirePackage{paralist}                                       %使用inparaenum环境
+\RequirePackage{enumitem}                                       %普通列表环境
 \RequirePackage{pifont}                                         %带圈数字序号
 \RequirePackage[flushmargin,bottom,perpage,symbol*]{footmisc}   %脚注格式设置
 \RequirePackage{fancyhdr}                                       %页眉页脚
